@@ -89,7 +89,7 @@ spring.cloud.stream:
     content-type: application/json
 spring.cloud.stream.bindings:
   producer-out-0:
-    destination: event-cjrequena-sample # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
+    destination: event-cjrequena-sample-000 # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
     content-type: application/json # The content type of the channel.
     binder: kafka # The binder used by this binding. See Multiple Binders on the Classpath for details.
     producer:
@@ -108,7 +108,7 @@ spring.cloud.stream.kafka.binder:
   #configuration: # Key/Value map of client properties (both producers and consumer) passed to all clients created by the binder. Due to the fact that these properties are used by both producers and consumers, usage should be restricted to common properties
   producer-properties:
     #key.serializer: org.apache.kafka.common.serialization.StringSerializer
-    #value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    #value.serializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer
     retry.backoff.ms: 100
     schema.registry.url: http://localhost:8081
     max.in.flight.requests.per.connection: 1
