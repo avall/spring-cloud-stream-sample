@@ -85,11 +85,11 @@ spring.cloud.stream:
   instanceCount: 1 # The number of deployed instances of an application. Must be set for partitioning and if using Kafka.
   defaultBinder: kafka # The default binder to use, if multiple binders are configured. See Multiple Binders on the Classpath.
   overrideCloudConnectors: false # This property is only applicable when the cloud profile is active and Spring Cloud Connectors are provided with the application. If the property is false (the default), the binder will detect a suitable bound service
-spring.cloud.stream.function:
-  definition: handler
+  default:
+    content-type: application/json
 spring.cloud.stream.bindings:
   producer-out-0:
-    destination: event-cjrequena-sample-0 # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
+    destination: event-cjrequena-sample # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
     content-type: application/json # The content type of the channel.
     binder: kafka # The binder used by this binding. See Multiple Binders on the Classpath for details.
     producer:
@@ -99,13 +99,19 @@ spring.cloud.stream.bindings:
       #partitionSelectorExpression: A SpEL expression for customizing partition selection. Mutually exclusive with partitionSelectorClass. If neither is set, the partition will be selected as the hashCode(key) % partitionCount, where key is computed via either partitionKeyExpression or partitionKeyExtractorClass.
       partitionCount: 1 # The number of target partitions for the data, if partitioning is enabled.
       #requiredGroups: # A comma-separated list of groups to which the producer must ensure message delivery even if they start after it has been created
-      headerMode: embeddedHeaders # When set to raw, disables header embedding on output. Effective only for messaging middleware that does not support message headers natively and requires header embedding. Useful when producing data for non-Spring Cloud Stream applications.
+      headerMode: headers
       useNativeEncoding: false # When set to true, the outbound message is serialized directly by client library, which must be configured correspondingly (e.g. setting an appropriate Kafka producer value serializer).
       #errorChannelEnabled: # When set to true, if the binder supports async send results; send failures will be sent to an error channel for the destination. See Message Channel Binders and Error Channels for more information.
 spring.cloud.stream.kafka.binder:
   brokers: localhost # A list of brokers to which the Kafka binder will connect.
   defaultBrokerPort: 9092 # This sets the default port when no port is configured in the broker list
-  #spring.cloud.stream.kafka.binder.configuration: # Key/Value map of client properties (both producers and consumer) passed to all clients created by the binder. Due to the fact that these properties are used by both producers and consumers, usage should be restricted to common properties
+  #configuration: # Key/Value map of client properties (both producers and consumer) passed to all clients created by the binder. Due to the fact that these properties are used by both producers and consumers, usage should be restricted to common properties
+  producer-properties:
+    #key.serializer: org.apache.kafka.common.serialization.StringSerializer
+    #value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    retry.backoff.ms: 100
+    schema.registry.url: http://localhost:8081
+    max.in.flight.requests.per.connection: 1
   headers: # The list of custom headers that will be transported by the binder. Default: empty.
     - x-test-header
   healthTimeout: 60 # The time to wait to get partition information in seconds; default 60. Health will report as down if this timer expires.
