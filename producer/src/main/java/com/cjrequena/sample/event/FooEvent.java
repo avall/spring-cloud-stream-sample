@@ -8,6 +8,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 @Data
@@ -16,9 +17,10 @@ import java.time.OffsetDateTime;
 @ToString(callSuper = true)
 @JsonNaming(PropertyNamingStrategy.LowerCaseStrategy.class)
 @JsonSerializableSchema
-public class FooEvent  {
+public class FooEvent implements Serializable {
 
   // Unique id for the specific message. This id is globally unique
+  @JsonProperty(value = "id")
   @NotNull(message = "id is mandatory")
   @Pattern(regexp = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", message = "Format is not valid")
   @Getter(onMethod = @__({@JsonProperty("id")}))
@@ -28,12 +30,18 @@ public class FooEvent  {
   protected String source;
 
   // The version of the CloudEvents specification which the event uses.
+  @JsonProperty(value = "specversion")
+  @NotNull(message = "specversion is required")
+  @Getter(onMethod = @__({@JsonProperty("specversion")}))
   protected final String specVersion = "1.0";
 
   // Type of message
   protected String type;
 
   // Content type of the data value. Must adhere to RFC 2046 format.
+  @JsonProperty(value = "datacontenttype")
+  @NotNull(message = "datacontenttype is required")
+  @Getter(onMethod = @__({@JsonProperty("datacontenttype")}))
   public String dataContentType;
 
   // Describes the subject of the event in the context of the event producer (identified by source).
