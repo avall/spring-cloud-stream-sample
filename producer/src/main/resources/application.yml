@@ -89,7 +89,7 @@ spring.cloud.stream:
     content-type: application/json
 spring.cloud.stream.bindings:
   producer-out-0:
-    destination: event-cjrequena-sample-006 # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
+    destination: event-cjrequena-sample-000 # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
     content-type: application/json # The content type of the channel.
     binder: kafka # The binder used by this binding. See Multiple Binders on the Classpath for details.
     producer:

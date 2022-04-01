@@ -1,6 +1,7 @@
 package com.cjrequena.sample.configuration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -37,11 +38,12 @@ public class JacksonConfiguration {
    */
   @Bean
   public ObjectMapper objectMapper() {
-    ObjectMapper builder = jacksonBuilder().simpleDateFormat("yyyy-MM-dd").modules(new JavaTimeModule()).build();
-    builder.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    builder.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-    builder.setFilterProvider(new SimpleFilterProvider().setFailOnUnknownId(false));
-    return builder;
+    ObjectMapper mapper = jacksonBuilder().simpleDateFormat("yyyy-MM-dd").modules(new JavaTimeModule()).build();
+    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+    mapper.setFilterProvider(new SimpleFilterProvider().setFailOnUnknownId(false));
+    mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+    return mapper;
   }
 
 }
