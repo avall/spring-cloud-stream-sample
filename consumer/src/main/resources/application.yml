@@ -89,20 +89,21 @@ spring.cloud.stream.function:
   definition: consumer
 spring.cloud.stream.bindings:
   consumer-in-0:
-    destination: event-cjrequena-sample-000 # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
+    destination: event-cjrequena-sample-006 # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
     group: group-1 # The consumer group of the channel. Applies only to inbound bindings. See Consumer Groups.
     content-type: application/json # The content type of the channel.
     binder: kafka # The binder used by this binding. See Multiple Binders on the Classpath for details.
     consumer:
       concurrency: 1 # The concurrency of the inbound consumer. default 1
       partitioned: true # Whether the consumer receives data from a partitioned producer. Default: false.
-      headerMode: embeddedHeaders # When set to raw, disables header parsing on input. Effective only for messaging middleware that does not support message headers natively and requires header embedding. Useful when inbound data is coming from outside Spring Cloud Streamapplications. efault: embeddedHeaders.
+      headerMode: headers # When set to raw, disables header parsing on input. Effective only for messaging middleware that does not support message headers natively and requires header embedding. Useful when inbound data is coming from outside Spring Cloud Streamapplications. efault: embeddedHeaders.
       maxAttempts: 3 # If processing fails, the number of attempts to process the message (including the first). Set to 1 to disable retry. Default: 3.
       backOffInitialInterval: 1000 # The backoff initial interval on retry. Default: 1000.
       backOffMaxInterval: 10000 # The maximum backoff interval. Default: 10000.
       backOffMultiplier: 2.0 # The backoff multiplier. Default: 2.0.
       instanceIndex: -1 # When set to a value greater than equal to zero, allows customizing the instance index of this consumer (if different from spring.cloud.stream.instanceIndex). When set to a negative value, it will default to spring.cloud.stream.instanceIndex. Default: -1.
       instanceCount: -1 # When set to a value greater than equal to zero, allows customizing the instance count of this consumer (if different from spring.cloud.stream.instanceCount). When set to a negative value, it will default to spring.cloud.stream.instanceCount. Default: -1.
+      useNativeDencoding: false
 spring.cloud.stream.kafka.binder:
   brokers: localhost # A list of brokers to which the Kafka binder will connect.
   defaultBrokerPort: 9092 # This sets the default port when no port is configured in the broker list
