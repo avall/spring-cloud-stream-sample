@@ -77,12 +77,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-kafka</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-stream-schema</artifactId>
-            <version>2.2.1.RELEASE</version> <!-- TODO -->
-        </dependency>
-
+        <!-- Confluent serializers -->
         <dependency>
             <groupId>io.confluent</groupId>
             <artifactId>kafka-json-schema-serializer</artifactId>
@@ -93,8 +88,6 @@
             <artifactId>kafka-json-serializer</artifactId>
             <version>7.0.1</version>
         </dependency>
-
-
         <!-- Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>

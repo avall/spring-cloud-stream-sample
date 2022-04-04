@@ -3,7 +3,6 @@ package com.cjrequena.sample.event;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -16,7 +15,6 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonNaming(PropertyNamingStrategy.LowerCaseStrategy.class)
-@JsonSerializableSchema
 public class FooEvent implements Serializable {
 
   // Unique id for the specific message. This id is globally unique
