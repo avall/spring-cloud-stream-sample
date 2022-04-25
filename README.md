@@ -1,16 +1,21 @@
 # spring-cloud-stream-sample
 
 ## Without schema registry.
-To use producers and consumers example without a schema registry, just comment or remove
-
-- from producer-properties
+To use producers and consumers example without a schema registry
+ 
 ```yml
-  key.serializer: org.apache.kafka.common.serialization.StringSerializer
-  value.serializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer
-  schema.registry.url: http://localhost:8081
+spring.cloud.stream.bindings.useNativeEncoding: false
+```
+- Remove from producer-properties
+```yml
+  producer-properties:
+    key.serializer: org.apache.kafka.common.serialization.StringSerializer
+    value.serializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer
+    schema.registry.url: http://localhost:8081
+    auto.register.schemas: false
+    use.latest.version: true
 ```   
-
-- from consumer-properties
+- Remove from consumer-properties
 ```yml
   key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
   value.deserializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer

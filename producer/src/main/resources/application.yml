@@ -110,6 +110,8 @@ spring.cloud.stream.kafka.binder:
     key.serializer: org.apache.kafka.common.serialization.StringSerializer
     value.serializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer
     schema.registry.url: http://localhost:8081
+    auto.register.schemas: true
+    use.latest.version: true
   headers: # The list of custom headers that will be transported by the binder. Default: empty.
     - x-test-header
   healthTimeout: 60 # The time to wait to get partition information in seconds; default 60. Health will report as down if this timer expires.
