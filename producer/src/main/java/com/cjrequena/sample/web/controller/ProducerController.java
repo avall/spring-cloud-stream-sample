@@ -29,6 +29,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.util.UUID;
+
 import static com.cjrequena.sample.common.Constants.VND_SAMPLE_SERVICE_V1;
 import static org.apache.http.HttpHeaders.CACHE_CONTROL;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -86,13 +88,12 @@ public class ProducerController {
   )
   @SneakyThrows
   public ResponseEntity<Void> produce(@Parameter @Valid @RequestBody FooDTO dto, BindingResult bindingResult, HttpServletRequest request, UriComponentsBuilder ucBuilder) {
-
     Span span = tracer.currentSpan();
     if (span != null) {
       log.info("Trace ID {}", span.context().traceId());
       log.info("Span ID {}", span.context().spanId());
     }
-
+    dto.setId(UUID.randomUUID());
     this.producerService.produce(dto);
     // Headers
     HttpHeaders headers = new HttpHeaders();
