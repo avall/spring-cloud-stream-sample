@@ -21,6 +21,5 @@ public class ProducerMainApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    producerService.producer();
   }
 }

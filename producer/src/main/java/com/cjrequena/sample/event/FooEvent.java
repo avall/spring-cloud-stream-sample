@@ -1,5 +1,6 @@
 package com.cjrequena.sample.event;
 
+import com.cjrequena.sample.dto.FooDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -49,7 +50,7 @@ public class FooEvent implements Serializable {
   protected OffsetDateTime time;
 
   // The event payload.
-  protected String data;
+  protected FooDTO data;
 
   // Base64 encoded event payload. Must adhere to RFC4648.
   protected String dataBase64;
