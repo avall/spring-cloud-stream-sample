@@ -20,7 +20,7 @@ server.port: ${SERVER_PORT:9080} # Server HTTP port.
 
 spring:
   application:
-    name: consumer
+    name: producer
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:local}
   cloud:
@@ -70,6 +70,23 @@ management.info.defaults.enabled: true # Whether to enable default info contribu
 management.info.env.enabled: true # Whether to enable environment info.
 management.info.git.enabled: true # Whether to enable git info.
 management.info.git.mode: full # Mode to use to expose git information.
+#
+management.metrics:
+  server:
+    excluded-uris: /swagger-ui.html, /webjars/.*, /admin/.*, /api-docs/.*, /v3/.*, /\*\*
+  export:
+    statsd:
+      enabled: false
+      flavor: datadog
+      host: ${METRICS_DATADOG_STATSDHOST:localhost}
+      port: ${METRICS_DATADOG_STATSDPORT:8125}
+    datadog:
+      enabled: true
+      api-key: "YOUR-API-KEY"
+      step: "30s"
+  tags:
+    application: ${spring.application.name}
+    environment: ${spring.profiles.active}
 
 # LOGGING
 logging.config: classpath:log4j2.xml # Location of the logging configuration file. For instance, `classpath:logback.xml` for Logback.
@@ -79,7 +96,7 @@ logging.level: # Log levels severity mapping. For instance, `logging.level.org.s
   org.flywaydb: INFO
   com.cjrequena.sample: DEBUG
 
-
+#
 spring.cloud.stream:
   instanceCount: 1 # The number of deployed instances of an application. Must be set for partitioning and if using Kafka.
   defaultBinder: kafka # The default binder to use, if multiple binders are configured. See Multiple Binders on the Classpath.
@@ -125,3 +142,6 @@ spring.cloud.stream.kafka.binder:
 spring.cloud.sleuth:
   json:
     enabled: false
+
+#
+

@@ -2,6 +2,8 @@ package com.cjrequena.sample.service;
 
 import com.cjrequena.sample.dto.FooDTO;
 import com.cjrequena.sample.event.FooEvent;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,9 @@ public class ProducerService {
 
   private final StreamBridge streamBridge;
 
+  @Counted
+  @Timed
   public void produce(FooDTO dto) {
-
     FooEvent event = new FooEvent();
     event.setId(String.valueOf(UUID.randomUUID()));
     event.setData(dto);
@@ -27,5 +30,10 @@ public class ProducerService {
       .send("producer-out-0", MessageBuilder.withPayload(event)
       .build());
     log.info("Event emitted {}", event);
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 }
