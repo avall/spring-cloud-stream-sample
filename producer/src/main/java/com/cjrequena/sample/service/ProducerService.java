@@ -31,7 +31,7 @@ public class ProducerService {
       .build());
     log.info("Event emitted {}", event);
     try {
-      Thread.sleep(3000);
+      Thread.sleep(10000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
