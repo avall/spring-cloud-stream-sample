@@ -1,5 +1,6 @@
 package com.cjrequena.sample.configuration;
 
+import io.micrometer.core.aop.CountedAspect;
 import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.config.MeterFilter;
@@ -20,6 +21,11 @@ public class MetricsConfiguration {
   @Bean
   public TimedAspect timedAspect(MeterRegistry registry) {
     return new TimedAspect(registry);
+  }
+
+  @Bean
+  public CountedAspect countedAspect(MeterRegistry meterRegistry) {
+    return new CountedAspect(meterRegistry);
   }
 
   @Bean
