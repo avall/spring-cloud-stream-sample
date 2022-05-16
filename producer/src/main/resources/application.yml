@@ -81,7 +81,7 @@ management.metrics:
       host: ${METRICS_DATADOG_STATSDHOST:localhost}
       port: ${METRICS_DATADOG_STATSDPORT:8125}
     datadog:
-      enabled: true
+      enabled: false
       api-key: "YOUR-API-KEY"
       step: "30s"
   tags:

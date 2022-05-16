@@ -30,10 +30,5 @@ public class ProducerService {
       .send("producer-out-0", MessageBuilder.withPayload(event)
       .build());
     log.info("Event emitted {}", event);
-    try {
-      Thread.sleep(10000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
   }
 }
