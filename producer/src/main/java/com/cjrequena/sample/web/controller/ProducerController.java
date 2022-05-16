@@ -28,7 +28,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import java.util.UUID;
 
 import static com.cjrequena.sample.common.Constants.VND_SAMPLE_SERVICE_V1;
